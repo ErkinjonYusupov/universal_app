@@ -27,23 +27,34 @@ class _PrayerTimeState extends State<PrayerTime> {
   }
 
   // bu funksiya filter qilib beradi yani texti o'zgartirib beradi
-  String filterText(String key) {
-    switch (key) {
-      case "tong_saharlik":
-        return "Bomdod nomozi";
-      case "quyosh":
-        return "Quyosh";
-      case "peshin":
-        return "Peshin nomozi";
-      case "asr":
-        return "Asr nomozi";
-      case "shom_iftor":
-        return "Shom nomozi";
-      case "hufton":
-        return "Hufton nomozi";
-      default:
-        return "";
-    }
+  // String filterText(String key) {
+  //   switch (key) {
+  //     case "tong_saharlik":
+  //       return "Bomdod nomozi";
+  //     case "quyosh":
+  //       return "Quyosh";
+  //     case "peshin":
+  //       return "Peshin nomozi";
+  //     case "asr":
+  //       return "Asr nomozi";
+  //     case "shom_iftor":
+  //       return "Shom nomozi";
+  //     case "hufton":
+  //       return "Hufton nomozi";
+  //     default:
+  //       return "";
+  //   }
+  // }
+  Map<String, dynamic> keys = {
+    "tong_saharlik": "Bomdod nomozi",
+    "quyosh": "Quyosh",
+    "peshin": "Peshin nomozi",
+    "asr": "Asr nomozi",
+    "shom_iftor": "Shom nomozi",
+    "hufton": "Hufton nomozi",
+  };
+  filterText(String key) {
+    return keys[key] ?? '';
   }
 
   @override
@@ -59,8 +70,16 @@ class _PrayerTimeState extends State<PrayerTime> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(controller.prayerTime['date'], style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
-                Text(controller.prayerTime['weekday'], style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),)
+                Text(
+                  controller.prayerTime['date'],
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.w600),
+                ),
+                Text(
+                  controller.prayerTime['weekday'],
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.w600),
+                )
               ],
             ),
             const Divider(),
