@@ -6,5 +6,4 @@ class AppColors {
   static Color yellow = const Color.fromRGBO(155, 145, 1, 0.486);
   static Color pink = const Color.fromARGB(121, 119, 1, 155);
   static Color violet = const Color.fromARGB(121, 16, 1, 155);
-  static Color test = const Color.fromARGB(121, 17, 8, 101);
 }
