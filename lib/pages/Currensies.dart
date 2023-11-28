@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:universal_app/config/Imports.dart';
-import 'package:universal_app/stores/home_controller.dart';
 
 class Currensies extends StatefulWidget {
   const Currensies({super.key});
@@ -31,12 +29,12 @@ class _CurrensiesState extends State<Currensies> {
                         style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w600),
                         children: [
-                          TextSpan(text: item['Nominal']+" "),
-                          TextSpan(text: item['CcyNm_UZ'])
+                          TextSpan(text: "${item.Nominal} "),
+                          TextSpan(text: item.CcyNm_UZ)
                         ])),
-                    subtitle: Text(item['Date']),
+                    subtitle: Text(item.Date),
                     trailing: Text(
-                      item['Rate'],
+                      item.Rate,
                       style:
                           const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
                     ),

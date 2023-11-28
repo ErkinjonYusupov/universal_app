@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:universal_app/config/Imports.dart';
-import 'package:universal_app/pages/PrayerTime.dart';
+import 'package:universal_app/models/prayer_time_model.dart';
 
 class HomeController extends GetxController {
   // https://cbu.uz/uz/arkhiv-kursov-valyut/json/
   Dio http = Dio();
 
-  List currensies = [];
+  List<CurrensiesModel> currensies = [];
 
   bool loading = false;
 
@@ -20,9 +20,8 @@ class HomeController extends GetxController {
     try {
       loading = true;
       update();
-      // await Future.delayed(Duration(seconds: 5));
       var res = await http.get('https://cbu.uz/uz/arkhiv-kursov-valyut/json/');
-      currensies = res.data;
+      currensies = currebsiesFromMap(res.data);
     } catch (err) {
       print(err);
     } finally {
@@ -38,22 +37,28 @@ class HomeController extends GetxController {
     "Farg'ona",
     "Andijon",
     "Namangan",
-    "Buxoro"
+    "Buxoro",
+    "Qarshi",
+    "Samarqand",
+    "Navoiy",
+    "Nukus",
+    "Guliston",
+    "Xiva",
+    "Qo'qon",
   ];
 
-  Map<String, dynamic> prayerTime = {};
+  late PrayerTimeModel prayerTime;
   String selectCity = '';
-
   fetchPrayerTimes() async {
     try {
       loading = true;
       update();
       var res = await http
           .get('https://islomapi.uz/api/present/day?region=$selectCity');
-      prayerTime = res.data;
-      Get.to(()=>const PrayerTime());
+      prayerTime = PrayerTimeModel.fromJson(res.data);
+      Get.to(() => const PrayerTime());
     } catch (err) {
-      print(err);
+      Get.snackbar("Xatolik", "Ma'lumot topilmadi");
     } finally {
       loading = false;
       update();

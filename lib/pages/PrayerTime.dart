@@ -1,5 +1,5 @@
 import 'package:universal_app/config/Imports.dart';
-import 'package:universal_app/stores/home_controller.dart';
+
 
 class PrayerTime extends StatefulWidget {
   const PrayerTime({super.key});
@@ -22,29 +22,11 @@ class _PrayerTimeState extends State<PrayerTime> {
 // page ishga tushishi bilan ishlatib yuboradi
   @override
   void initState() {
-    filterTime(controller.prayerTime['times']);
+    filterTime(controller.prayerTime.times);
     super.initState();
   }
 
-  // bu funksiya filter qilib beradi yani texti o'zgartirib beradi
-  // String filterText(String key) {
-  //   switch (key) {
-  //     case "tong_saharlik":
-  //       return "Bomdod nomozi";
-  //     case "quyosh":
-  //       return "Quyosh";
-  //     case "peshin":
-  //       return "Peshin nomozi";
-  //     case "asr":
-  //       return "Asr nomozi";
-  //     case "shom_iftor":
-  //       return "Shom nomozi";
-  //     case "hufton":
-  //       return "Hufton nomozi";
-  //     default:
-  //       return "";
-  //   }
-  // }
+ 
   Map<String, dynamic> keys = {
     "tong_saharlik": "Bomdod nomozi",
     "quyosh": "Quyosh",
@@ -71,12 +53,12 @@ class _PrayerTimeState extends State<PrayerTime> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  controller.prayerTime['date'],
+                  controller.prayerTime.date,
                   style: const TextStyle(
                       fontSize: 20, fontWeight: FontWeight.w600),
                 ),
                 Text(
-                  controller.prayerTime['weekday'],
+                  controller.prayerTime.weekday,
                   style: const TextStyle(
                       fontSize: 20, fontWeight: FontWeight.w600),
                 )
