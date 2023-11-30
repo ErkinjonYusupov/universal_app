@@ -28,12 +28,12 @@ class _PrayerTimeState extends State<PrayerTime> {
 
  
   Map<String, dynamic> keys = {
-    "tong_saharlik": "Bomdod nomozi",
+    "tong_saharlik": "Bomdod namozi",
     "quyosh": "Quyosh",
-    "peshin": "Peshin nomozi",
-    "asr": "Asr nomozi",
-    "shom_iftor": "Shom nomozi",
-    "hufton": "Hufton nomozi",
+    "peshin": "Peshin namozi",
+    "asr": "Asr namozi",
+    "shom_iftor": "Shom namozi",
+    "hufton": "Xufton namozi",
   };
   filterText(String key) {
     return keys[key] ?? '';

@@ -1,7 +1,8 @@
 
 import 'package:universal_app/config/Imports.dart';
 
-void main() {
+void main() async{
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
