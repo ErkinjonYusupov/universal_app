@@ -26,6 +26,7 @@ class _TasbehMainState extends State<TasbehMain> {
               TasbehButton(title: "Subhanalloh"),
               TasbehButton(title: "Alhamdulillah"),
               TasbehButton(title: "Allohu akbar"),
+              TasbehButton(title: "Astag'firulloh"),
             ],
           ),
         ),
