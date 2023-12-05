@@ -1,4 +1,3 @@
-
 class PrayerTimeModel {
   String date;
   String weekday;
@@ -10,9 +9,8 @@ class PrayerTimeModel {
     required this.times,
   });
 
-  factory PrayerTimeModel.fromJson(Map<String, dynamic> json) =>
-      PrayerTimeModel(
-          date: json['date'],
-          weekday: json['weekday'],
-          times: json['times']);
+  factory PrayerTimeModel.fromJson(Map<String, dynamic> json) {
+    return PrayerTimeModel(
+        date: json['date'], weekday: json['weekday'], times: json['times']);
+  }
 }

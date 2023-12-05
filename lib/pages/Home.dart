@@ -39,9 +39,11 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 24),
-                  const Text("Hammasi bittada",
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.w700)),
+                  Text("Hammasi bittada",
+                      style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.pink)),
                   const SizedBox(height: 24),
                   HomeButton(
                     icon: Icons.attach_money,

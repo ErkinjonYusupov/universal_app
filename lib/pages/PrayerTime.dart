@@ -1,6 +1,5 @@
 import 'package:universal_app/config/Imports.dart';
 
-
 class PrayerTime extends StatefulWidget {
   const PrayerTime({super.key});
 
@@ -11,85 +10,55 @@ class PrayerTime extends StatefulWidget {
 class _PrayerTimeState extends State<PrayerTime> {
   HomeController controller = Get.put(HomeController());
 
-  List times = [];
-//bu funksiya obyektni listga aylantirib beradi
-  filterTime(data) {
-    data.forEach((key, value) {
-      times.add({"vaqt": key, "soat": value});
-    });
-  }
-
-// page ishga tushishi bilan ishlatib yuboradi
-  @override
-  void initState() {
-    filterTime(controller.prayerTime.times);
-    super.initState();
-  }
-
- 
-  Map<String, dynamic> keys = {
-    "tong_saharlik": "Bomdod namozi",
-    "quyosh": "Quyosh",
-    "peshin": "Peshin namozi",
-    "asr": "Asr namozi",
-    "shom_iftor": "Shom namozi",
-    "hufton": "Xufton namozi",
-  };
-  filterText(String key) {
-    return keys[key] ?? '';
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("${controller.selectCity} vaqti bilan"),
-      ),
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  controller.prayerTime.date,
-                  style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.w600),
-                ),
-                Text(
-                  controller.prayerTime.weekday,
-                  style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.w600),
-                )
-              ],
-            ),
-            const Divider(),
-            Column(
-              children: List.generate(times.length, (index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 3),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return GetBuilder<HomeController>(
+      builder: (controller) {
+        return Scaffold(
+          appBar: AppBar(title: Text("${controller.selectCity} vaqti bilan")),
+          body: controller.loading
+              ? const Center(child: CircularProgressIndicator())
+              : Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
                     children: [
-                      Text(
-                        filterText(times[index]['vaqt']),
-                        style: const TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w600),
-                      ),
-                      Text(
-                        times[index]['soat'],
-                        style: const TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w600),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(controller.prayerTime!.date,
+                                style: const TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.w600)),
+                            Text(controller.prayerTime!.weekday,
+                                style: const TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.w600))
+                          ]),
+                      const Divider(),
+                      Column(
+                        children:
+                            List.generate(controller.times.length, (index) {
+                          var item = controller.times[index];
+                          return Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 3),
+                              child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(controller.filterText(item['vaqt']),
+                                        style: const TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600)),
+                                    Text(item['soat'],
+                                        style: const TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600))
+                                  ]));
+                        }),
                       ),
                     ],
                   ),
-                );
-              }),
-            ),
-          ],
-        ),
-      ),
+                ),
+        );
+      },
     );
   }
 }
