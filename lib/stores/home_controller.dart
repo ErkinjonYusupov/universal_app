@@ -30,8 +30,6 @@ class HomeController extends GetxController {
     }
   }
 
-  // https://islomapi.uz/api/present/day?region=Toshkent
-
   List<String> cities = [
     "Toshkent",
     "Farg'ona",
@@ -47,21 +45,49 @@ class HomeController extends GetxController {
     "Qo'qon",
   ];
 
-  late PrayerTimeModel prayerTime;
+  PrayerTimeModel? prayerTime;
+
   String selectCity = '';
+
+
   fetchPrayerTimes() async {
     try {
+      times = [];
       loading = true;
       update();
+      Get.to(() => const PrayerTime());
       var res = await http
           .get('https://islomapi.uz/api/present/day?region=$selectCity');
       prayerTime = PrayerTimeModel.fromJson(res.data);
-      Get.to(() => const PrayerTime());
+      filterTime(prayerTime!.times);
     } catch (err) {
       Get.snackbar("Xatolik", "Ma'lumot topilmadi");
     } finally {
       loading = false;
       update();
     }
+  }
+
+   Map<String, dynamic> keys = {
+    "tong_saharlik": "Bomdod namozi",
+    "quyosh": "Quyosh",
+    "peshin": "Peshin namozi",
+    "asr": "Asr namozi",
+    "shom_iftor": "Shom namozi",
+    "hufton": "Xufton namozi",
+  };
+
+  filterText(String key) {
+    return keys[key] ?? '';
+  }
+
+
+  List times = [];
+
+  //bu funksiya obyektni listga aylantirib beradi
+  filterTime(data) {
+    data.forEach((key, value) {
+      times.add( {"vaqt": key, "soat": value} );
+    });
   }
 }
